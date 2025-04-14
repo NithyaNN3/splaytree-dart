@@ -16,7 +16,7 @@ class SplayTreeSetNode<K> extends SplayTreeNode<K, SplayTreeSetNode<K>>{
 }
 
 class SplayTreeMapNode<K, V> extends SplayTreeNode<K, SplayTreeMapNode<K, V>> {
-    final value: V;
+    final V value;
 
     SplayTreeMapNode(K key, V value) : super(key);
 
@@ -153,7 +153,7 @@ abstract class SplayTree<K, Node extends SplayTreeNode<K, Node>> {
         return current;
     }
 
-    Node splayMax(Node: node) {
+    Node splayMax(Node node) {
         Node current = node;
         Node? nextRight = current.right;
         while (nextRight != null) {
@@ -328,7 +328,7 @@ class SplayTreeMap<K, V> extends SplayTree<K, SplayTreeMapNode<K, V>> implements
 
     V setIfAbsent(K key, V Function() IfAbsent) {
         var comp = this.splay(key);
-        if (comp = 0) {
+        if (comp == 0) {
             return this.root!.value;
         }
         final modificationCount = this.modificationCount;
@@ -355,11 +355,6 @@ class SplayTreeMap<K, V> extends SplayTree<K, SplayTreeMapNode<K, V>> implements
     bool firstKey() {
         if (this.root == null) return null;
         return this._first()!.key;
-    }
-
-    bool lastKey() {
-        if (this.root == null) return null;
-        return this._last()!.key;
     }
 
     bool lastKey() {
@@ -513,7 +508,7 @@ class SplayTreeSet<E> extends SplayTree<E, SplayTreeSetNode<E>> implements Itera
     }
 
     bool isEmpty() {
-        return this._root = null;
+        return this._root == null;
     }
 
     bool isNotEmpty() {
@@ -558,10 +553,10 @@ class SplayTreeSet<E> extends SplayTree<E, SplayTreeSetNode<E>> implements Itera
         if (comp > 0) return this._root!.key;
         SplayTreeSetNode<E>? node = this._root!.right;
         if (node == null) return null;
-        var nodeRight = node.right;
-        while (nodeRight != null) {
-            node = nodeRight;
-            nodeRight = node.right;
+        var nodeLeft = node.left;
+        while (nodeLeft != null) {
+            node = nodeLeft;
+            nodeLeft = node.left;
         }
         return node!.key;
     }
